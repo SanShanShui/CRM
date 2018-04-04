@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+	<struts>
+	<constant name="struts.devMode"  value="true"></constant>
+	<package name="text" extends="mypackage">
+
+
+	<action name="*_*" class="{1}Action" method="{2}">
+ 	<result name="input">/jsp/login.jsp</result>
+	<result name="findAllDep">/jsp/dep/listDep.jsp</result>
+	<result name="add" type="chain">{1}_findAll</result>
+	<result name="del" type="chain">{1}_findAll</result>
+	<result name="findByIdDep" >/jsp/dep/editDep.jsp</result>
+	<result name="update" type="chain">{1}_findAll</result>
+	<!-- positions -->
+	<result name="findAllPos">/jsp/position/listPosition.jsp</result>
+	</action>
+
+	</package>
+	</struts>

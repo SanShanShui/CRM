@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<package name="student" namespace="/student" extends="mypackage">
+
+		<action name="findAllStu" class="studentAction" method="findAllStu">
+		<interceptor-ref name="myStack"></interceptor-ref>
+ 	    <result  name="login" type="redirect">/jsp/login.jsp</result>          
+        <result name="findAllStu">/jsp/employee/listEmployee.jsp</result>
+		</action>
+        
+        <action name="addStu" class="studentAction" method="addStu">
+ 		<interceptor-ref name="myStack"></interceptor-ref>  
+ 	    <result  name="login" type="redirect">/jsp/login.jsp</result>     
+        <result name="addStu" type="chain">findAllStu</result>
+        </action>
+        
+        <action name="selectOneStu" class="studentAction" method="selectOneStu">
+ 		<interceptor-ref name="myStack"></interceptor-ref>       
+  	    <result  name="login" type="redirect">/jsp/login.jsp</result>          
+        <result name="selectOneStu" >/jsp/employee/editEmployee.jsp</result>
+        </action>
+        
+        <action name="updateStu" class="studentAction" method="updateStu">
+ 		<interceptor-ref name="myStack"></interceptor-ref>       
+ 	    <result  name="login" type="redirect">/jsp/login.jsp</result>           
+        <result name="updateStu" type="chain">findAllStu</result>
+        </action>
+        
+        <action name="selectStu" class="studentAction" method="selectStu">
+ 		<interceptor-ref name="myStack"></interceptor-ref>       
+  	    <result  name="login" type="redirect">/jsp/login.jsp</result>          
+        <result name="selectStu" >/jsp/employee/viewEmployee.jsp</result>
+        </action>
+        
+	</package>
+</struts>

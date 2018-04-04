@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<package name="follow" namespace="/follow" extends="mypackage">
+
+		<action name="findAllFollow" class="followAction" method="findAllFollow">
+		<interceptor-ref name="myStack"></interceptor-ref>
+ 	    <result  name="login" type="redirect">/jsp/login.jsp</result>          
+        <result name="findAllFollow">/jsp/user/listUser.jsp</result>
+		</action>
+        
+        <action name="addFollow" class="followAction" method="addFollow">
+ 		<interceptor-ref name="myStack"></interceptor-ref>  
+ 	    <result  name="login" type="redirect">/jsp/login.jsp</result>     
+        <result name="addFollow" type="chain">findAllFollow</result>
+        </action>
+        
+        <action name="findSId" class="followAction" method="findSId">
+ 		<interceptor-ref name="myStack"></interceptor-ref>       
+  	    <result  name="login" type="redirect">/jsp/login.jsp</result>          
+        <result name="findSId" >/jsp/user/addUser.jsp</result>
+        </action>
+        
+        <action name="findFId" class="followAction" method="findFId">
+ 		<interceptor-ref name="myStack"></interceptor-ref>       
+  	    <result  name="login" type="redirect">/jsp/login.jsp</result>          
+        <result name="findFId" >/jsp/user/viewUser.jsp</result>
+        </action>
+        
+	</package>
+</struts>

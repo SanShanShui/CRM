@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.devMode" value="true"></constant>
+	<package name="mypackage" abstract="true" extends="struts-default">
+		<interceptors>
+			<interceptor name="myInter" class="com.zy.util.MyInterceptor"></interceptor>
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="myInter">
+				<param name="excludeMethods">login</param>
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+	</package>
+	<package name="text1" extends="mypackage">
+		<!-- 登录 -->
+		<action name="loginAction" class="loginAction" method="login">
+			<interceptor-ref name="myStack"></interceptor-ref>
+			<result name="success" type="redirect">/jsp/frame.jsp</result>
+			<result  name="login" type="redirect">/jsp/login.jsp</result>
+		</action>
+		<!--超管理员  -->
+		<action name="selectAllUser" class="userAction" method="selectAllUser">
+		<interceptor-ref name="myStack"></interceptor-ref>
+		<result  name="login" type="redirect">/jsp/login.jsp</result>
+		<result name="selectAllUser">/jsp/manager/manlist.jsp</result>
+		</action>
+		<action name="delUser" class="userAction" method="delUser">
+		<interceptor-ref name="myStack"></interceptor-ref>
+		<result  name="login" type="redirect">/jsp/login.jsp</result>
+		<result name="delUser" type="chain">selectAllUser</result>
+		</action>
+		<!-- addUser -->
+		<action name="addUser" class="userAction" method="addUser">
+		<interceptor-ref name="myStack"></interceptor-ref>
+		<result  name="login" type="redirect">/jsp/login.jsp</result>
+		<result name="addUser" type="chain">selectAllUser</result>
+		</action>
+		<action name="findAllRole" class="userAction" method="findAllRole">
+		<interceptor-ref name="myStack"></interceptor-ref>
+		<result  name="login" type="redirect">/jsp/login.jsp</result>
+		<result name="findAllRole">/jsp/manager/addUser.jsp</result>
+		</action>
+		<!-- updateUser-->
+		<action name="updateUser" class="userAction" method="updateUser">
+		<interceptor-ref name="myStack"></interceptor-ref>
+		<result  name="login" type="redirect">/jsp/login.jsp</result>
+		<result name="updateUser" type="chain">selectAllUser</result>
+		</action>
+		<action name="selectOneUser" class="userAction" method="selectOneUser">
+		<interceptor-ref name="myStack"></interceptor-ref>
+		<result  name="login" type="redirect">/jsp/login.jsp</result>
+		<result name="selectOneUser">/jsp/manager/editUser.jsp</result>
+		</action>
+		<action name="selectRoleDesc" class="userAction" method="selectRoleDesc">
+		<interceptor-ref name="myStack"></interceptor-ref>
+		</action>
+		
+	</package>
+</struts>
